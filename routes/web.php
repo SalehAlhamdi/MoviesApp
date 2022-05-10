@@ -32,6 +32,7 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
     Route::post('/store',[MovieController::class,'store_movie'])->name('store_movie');
     Route::delete('/delete/{id}',[MovieController::class,'delete_movie'])->name('delete_movie');
     Route::post('/restore/{id}',[MovieController::class,'restore_trashed_movies'])->name('restore_movies');
+    Route::post('/update/{id}',[MovieController::class,'update_movie'])->name('update_movie');
 
 //    dashboard view section
     Route::get('/index',[DashboardController::class,'index'])->name('index');
@@ -39,6 +40,8 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
     Route::get('/movies/trash',[DashboardController::class,'show_deleted_movies'])->name('trashed');
     Route::get('/show/movie',[DashboardController::class,'show_movies'])->name('show.movie');
     Route::get('/show/movie/{id}',[DashboardController::class,'movie_info'])->name('movie.info');
+    Route::get('/update/movie/{id}',[DashboardController::class,'update_movie'])->name('movie.update');
+
 
 
 });
