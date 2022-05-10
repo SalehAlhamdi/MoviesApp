@@ -59,8 +59,7 @@
                                 <td>
                                     <div>
 
-                                        <a href="{{route('dashboard.movie.info',$movie->id)}}" onclick="event.preventDefault();
-                                            document.getElementById('info-form-{{ $movie->id }}').submit();"
+                                        <a href="{{route('dashboard.movie.info',$movie->id)}}"
                                            class="btn btn-info btn-icon-split">
 
                                                 <span class="icon text-white-50">
@@ -69,18 +68,17 @@
                                             <span class="text" role="button">عرض الفيلم</span>
                                         </a>
 
-                                        <form id="info-form-{{ $movie->id }}" action="{{ route('dashboard.movie.info',$movie->id) }}"
-                                              style="display: none;">
-                                            @csrf
-                                        </form>
-
                                         <hr>
-                                        <a href="#" class="btn btn-warning btn-icon-split">
+
+                                        <a href="{{route('dashboard.movie.update',$movie->id)}}"
+                                           class="btn btn-warning btn-icon-split">
+
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-exclamation-triangle"></i>
                                                 </span>
-                                            <span class="text">تعديل الفيلم</span>
+                                            <span class="text" role="button">تعديل الفيلم</span>
                                         </a>
+
                                         <hr>
 
                                         <a href="{{route('dashboard.delete_movie',$movie->id)}}" onclick="event.preventDefault();
