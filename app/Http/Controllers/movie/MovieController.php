@@ -18,11 +18,11 @@ class MovieController extends Controller
             $imgname=time().'.'.$img->extension();
             $img->move(public_path('images'),$imgname);
         }
-        if ($request->hasFile('movie'))
-            $mov=$request->file('movie');
-            $movname=time().'.'.$mov->extension();
-            $mov->move(public_path('movies'),$movname);
-
+        if ($request->hasFile('movie')) {
+            $mov = $request->file('movie');
+            $movname = time() . '.' . $mov->extension();
+            $mov->move(public_path('movies'), $movname);
+        }
         $movies=Movies::create([
            'title'=>$request->movie_title,
             'description'=>$request->movie_description,
@@ -55,6 +55,38 @@ class MovieController extends Controller
         $movie=Movies::withTrashed()->where('id', $id)->firstOrFail();
         $movie->restore();
         return back()->with('movie_restored','تم أستعادة الفيلم بنجاح');
+    }
+
+    public function update_movie(Movies $movie,StoreMovieRequest $request){
+        $imgname='';
+        $movname='';
+        if (file_exists(asset('images'.'/'.$movie->imgPath))){
+            unlink(asset('images'.'/'.$movie->movPath));
+        }
+        if (file_exists(asset('movies'.'/'.$movie->imgPath))){
+            unlink(asset('movies'.'/'.$movie->movPath));
+        }
+        if ($request->hasFile('image')){
+
+            $img=$request->file('image');
+            $imgname=time().'.'.$img->extension();
+            $img->move(public_path('images'),$imgname);
+        }
+        if ($request->hasFile('movie')) {
+
+            $mov = $request->file('movie');
+            $movname = time() . '.' . $mov->extension();
+            $mov->move(public_path('movies'), $movname);
+        }
+        $movie->update([
+
+            'title'=>$request->movie_title,
+            'description'=>$request->movie_description,
+            'releaseDate'=>$request->movie_rela,
+            'imgPath'=>$imgname,
+            'movPath'=>$movname,
+        ]);
+        return back()->with('success_add_movie','تم تحديث الفيلم بنجاح')->with('genres');
     }
 
 }
