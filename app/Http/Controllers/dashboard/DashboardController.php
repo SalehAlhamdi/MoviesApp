@@ -41,7 +41,13 @@ class DashboardController extends Controller
     }
 
     public function movie_info($id){
-        $movie=Movies::where('id',$id)->first();
+        $movie=Movies::where('id',$id)->firstOrFail();
         return view('admin.movies.movie_info',compact('movie'));
+    }
+
+    public function update_movie($id){
+        $genres=Genres::all();
+        $movie=Movies::where('id',$id)->with('genres')->firstOrFail();
+        return response(view('admin.movies.create',compact('movie','genres')));
     }
 }
