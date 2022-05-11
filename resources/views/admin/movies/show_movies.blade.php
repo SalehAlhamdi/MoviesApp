@@ -28,7 +28,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header bg-dark py-3">
-                <h6 class="m-0 font-weight-bold text-primary text-light text-center ">جدول جميع الافلام</h6>
+                <h6 class="m-0 font-weight-bold text-primary text-light  ">جدول جميع الافلام</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -48,12 +48,15 @@
                         @foreach($movies as $movie)
                             <tr class="text-center">
                                 <td>{{$movie->title}}</td>
-                                <td>  <img class=" card-img " src="{{asset('images')}}/{{$movie->imgPath}}" width="200px"> </td>
+                                <td>  <img class=" card-img " src="{{asset('images')}}/{{$movie->imgPath}}" style="width:250px"> </td>
                                 <td>{{$movie->description}}</td>
                                 <td>{{$movie->releaseDate}}</td>
                                 <td>
                                     @foreach($movie->genres as $genre)
-                                        {{$genre->name}}
+                                        <p class="btn-sm btn-secondary d-inline-block  shadow-sm">
+                                            {{$genre->name}}
+                                        </p>
+
                                     @endforeach
                                 </td>
                                 <td>

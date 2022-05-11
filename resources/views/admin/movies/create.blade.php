@@ -60,7 +60,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group">
-                                <input  placeholder="عنوان الفيلم" type="text" class="form-control form-control-user" name="movie_title" required autocomplete="new-password">
+                                <input  placeholder="عنوان الفيلم" type="text" class="form-control form-control-user" name="movie_title">
                             </div>
 
                             <hr class="sidebar-divider">
@@ -77,7 +77,7 @@
                                 <label for="formFileSm" class="form-label">صورة الفيلم</label>
 
 
-                                <input class="form-control" value="{{asset('images')}}/{{$movie->imgPath}}" name="image" type="file" onchange="preview_file(this)">
+                                <input class="form-control"  name="image" type="file" onchange="preview_file(this)">
                                 <img id="preview_img" class="my-3 rounded img-fluid">
                             </div>
 
@@ -89,7 +89,7 @@
                             <div class="form-group mt-3">
                                 <label for="formFileSm" class="form-label">أختيار  الفيلم</label>
 
-                                <input class="form-control" name="movie" type="file" value="{{asset('images')}}/{{$movie->movPath}}">
+                                <input class="form-control" name="movie" type="file">
                             </div>
 
                             @if($genres->count()>0)
@@ -99,6 +99,7 @@
                                     <select name="genres[]" id="genres" class="form-control" multiple>
                                         @foreach($genres as $genre)
                                             <option value="{{$genre->id}}">
+
 
                                                 {{$genre->name}}
 
@@ -146,7 +147,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group mt-4">
-                                <input  value="{{$movie->title}}" type="text" class="text-center  form-control form-control-user " style="font-size: 20px" name="movie_title" required autocomplete="new-password">
+                                <input  value="{{$movie->title}}" type="text" id="movie_title" class="text-center  form-control form-control-user " style="font-size: 20px" name="movie_title">
                             </div>
 
                             <hr class="sidebar-divider mt-4">
@@ -179,7 +180,7 @@
                             <div class="form-group mt-3">
                                 <div class="h5 text-center font-weight-bold text-gray-800">أختيار الفيلم</div>
 
-                                <input class="form-control" name="movie" type="file">
+                                <input class="form-control" data-bu name="movie" type="file">
                             </div>
 
                                 <hr class="sidebar-divider mt-4">
