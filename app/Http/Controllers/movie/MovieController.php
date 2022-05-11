@@ -4,6 +4,7 @@ namespace App\Http\Controllers\movie;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\movie\StoreMovieRequest;
+use App\Http\Requests\movie\UpdateRequest;
 use App\Models\Genres;
 use App\Models\Movies;
 use Illuminate\Http\Request;
@@ -57,29 +58,32 @@ class MovieController extends Controller
         return back()->with('movie_restored','تم أستعادة الفيلم بنجاح');
     }
 
-    public function update_movie(Movies $movie,StoreMovieRequest $request){
+    public function update_movie($id,UpdateRequest $request){
+        $movie = Movies::where('id',$id)->firstOrFail();
+
         $imgname='';
         $movname='';
-        if (file_exists(asset('images'.'/'.$movie->imgPath))){
-            unlink(asset('images'.'/'.$movie->movPath));
-        }
-        if (file_exists(asset('movies'.'/'.$movie->imgPath))){
-            unlink(asset('movies'.'/'.$movie->movPath));
-        }
+
         if ($request->hasFile('image')){
+            if (file_exists(asset('images'.'/'.$movie->imgPath))){
+                unlink(asset('images'.'/'.$movie->movPath));
+            }
 
             $img=$request->file('image');
             $imgname=time().'.'.$img->extension();
             $img->move(public_path('images'),$imgname);
         }
         if ($request->hasFile('movie')) {
+            if (file_exists(asset('movies'.'/'.$movie->imgPath))){
+                unlink(asset('movies'.'/'.$movie->movPath));
+            }
 
             $mov = $request->file('movie');
             $movname = time() . '.' . $mov->extension();
             $mov->move(public_path('movies'), $movname);
         }
-        $movie->update([
 
+        $movie->update([
             'title'=>$request->movie_title,
             'description'=>$request->movie_description,
             'releaseDate'=>$request->movie_rela,
