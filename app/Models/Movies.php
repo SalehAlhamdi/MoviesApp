@@ -17,6 +17,11 @@ class Movies extends Model
         return $this->belongsToMany(Genres::class);
     }
 
+    public function hasGenre($id){
+        return in_array($id,$this->genres->pluck('id')->toArray());
+
+    }
+
 }
 
 
