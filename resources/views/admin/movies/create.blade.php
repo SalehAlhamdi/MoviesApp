@@ -96,7 +96,7 @@
                                 <hr class="sidebar-divider">
                                 <div class="form-group">
                                     <label>أختيار صفات الفيلم</label>
-                                    <select name="genres[]" id="genres" class="form-control" multiple>
+                                    <select name="genres[]" id="genres" class="form-control genre-selector" multiple>
                                         @foreach($genres as $genre)
                                             <option value="{{$genre->id}}">
 
@@ -138,7 +138,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">تعديل الفيلم</h6>
                     </div>
                     <div class="card-body">
-                        <form method="post" class="user" action="{{route('dashboard.update_movie',$movie->id)}}" enctype="multipart/form-data" >
+                        <form method="post" class="user" action="{{route('dashboard.update_movie',$movies->id)}}" enctype="multipart/form-data" >
                             @csrf
 
                             <div class="h5 text-center font-weight-bold text-gray-800">أسم الفيلم</div>
@@ -147,7 +147,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <div class="form-group mt-4">
-                                <input  value="{{$movie->title}}" type="text" id="movie_title" class="text-center  form-control form-control-user " style="font-size: 20px" name="movie_title">
+                                <input  value="{{$movies->title}}" type="text" id="movie_title" class="text-center  form-control form-control-user " style="font-size: 20px" name="movie_title">
                             </div>
 
                             <hr class="sidebar-divider mt-4">
@@ -155,7 +155,7 @@
                             <div class="h5 text-center font-weight-bold text-gray-800">سنة الاصدار</div>
 
                             <div class="col-sm-6 mb-3 mb-sm-0 mx-auto mt-4">
-                                <input type="text" name="movie_rela" class="form-control form-control-user text-center " style="font-size: 20px" value="{{$movie->releaseDate}}">
+                                <input type="text" name="movie_rela" class="form-control form-control-user text-center " style="font-size: 20px" value="{{$movies->releaseDate}}">
                             </div>
 
                             <hr class="sidebar-divider mt-4">
@@ -167,7 +167,7 @@
 
                                 <input class="form-control " name="image" type="file" onchange="preview_file(this)">
                                 <div class="text-center">
-                                    <img  id="preview_img" src="{{asset('images')}}/{{$movie->imgPath}}" width="250" class="my-3  rounded img-fluid">
+                                    <img  id="preview_img" src="{{asset('images')}}/{{$movies->imgPath}}" width="250" class="my-3  rounded img-fluid">
                                 </div>
                             </div>
 
@@ -187,15 +187,14 @@
                                 <div class="form-group">
                                     <div class="h5 text-gray-800">صفات الفيلم</div>
 
-                                    <select name="genres[]" id="genres" class="form-control" multiple>
+                                    <select name="genres[]" id="genres" class="form-control genre-selector" multiple>
                                         @foreach($genres as $genre)
-                                            <option value="{{$genre->id}}">
-{{--                                                @if($movie->genres->name == $genre->name)--}}
-{{--                                                    selected--}}
-{{--                                                @endif--}}
-                                                {{$genre->name}}
 
+                                            <option value="{{$genre->id}}" @if($movies->hasGenre($genre->id)) selected @endif>
+                                                    {{$genre->name}}
                                             </option>
+
+
                                         @endforeach
                                     </select>
                                 </div>
@@ -209,7 +208,7 @@
 
                             <div class="h5 text-center font-weight-bold text-gray-800">وصف الفيلم</div>
                             <div class="form-floating py-3">
-                                <textarea class="form-control text-right"  name="movie_description" style="height: 200px;font-size: 20px">{{$movie->description}}</textarea>
+                                <textarea class="form-control text-right"  name="movie_description" style="height: 200px;font-size: 20px">{{$movies->description}}</textarea>
                             </div>
 
                             <hr class="sidebar-divider mt-4">
@@ -225,17 +224,24 @@
         </div>
 
     @endif
-@endsection
-<script>
-    function preview_file(input){
-        var file=$('input[type=file]').get(0).files[0];
-        if(file){
-            var reader=new FileReader();
-            reader.onload=function (){
-                $('#preview_img').attr('src',reader.result);
-            }
-            reader.readAsDataURL(file);
-        }
-    }
 
-</script>
+    <script>
+        function preview_file(input){
+            var file=$('input[type=file]').get(0).files[0];
+            if(file){
+                var reader=new FileReader();
+                reader.onload=function (){
+                    $('#preview_img').attr('src',reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        $(document).ready(function() {
+            $('.genre-selector').select2();
+        });
+
+    </script>
+
+@endsection
+
