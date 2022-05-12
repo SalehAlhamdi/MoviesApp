@@ -8,6 +8,7 @@ use App\Http\Requests\movie\UpdateRequest;
 use App\Models\Genres;
 use App\Models\Movies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class MovieController extends Controller
 {
@@ -61,21 +62,24 @@ class MovieController extends Controller
     public function update_movie($id,UpdateRequest $request){
         $movie = Movies::where('id',$id)->firstOrFail();
 
-        $imgname='';
-        $movname='';
+        $imgname=$movie->imgPath;
+        $movname=$movie->movPath;
 
+        //images
         if ($request->hasFile('image')){
-            if (file_exists(asset('images'.'/'.$movie->imgPath))){
-                unlink(asset('images'.'/'.$movie->movPath));
+            if (!asset('images/'.$request->image) != asset('images/'.$movie->imgPath)){
+                File::delete(asset('images/'.$movie->imgPath));
             }
 
             $img=$request->file('image');
             $imgname=time().'.'.$img->extension();
             $img->move(public_path('images'),$imgname);
         }
+
+        //movies
         if ($request->hasFile('movie')) {
-            if (file_exists(asset('movies'.'/'.$movie->imgPath))){
-                unlink(asset('movies'.'/'.$movie->movPath));
+            if (!asset('images/'.$request->movie) != asset('images/'.$movie->movPath)){
+                File::delete(asset('images/'.$movie->movPath));
             }
 
             $mov = $request->file('movie');
@@ -83,13 +87,21 @@ class MovieController extends Controller
             $mov->move(public_path('movies'), $movname);
         }
 
+        //sync to delete unselected genres from db  and keep/adding new genres.
+        if ($request->has('genres')){
+            $movie->genres()->sync($request->genres);
+
+        }
+
         $movie->update([
             'title'=>$request->movie_title,
             'description'=>$request->movie_description,
             'releaseDate'=>$request->movie_rela,
-            'imgPath'=>$imgname,
             'movPath'=>$movname,
+            'imgPath'=>$imgname
         ]);
+
+
         return back()->with('success_add_movie','تم تحديث الفيلم بنجاح')->with('genres');
     }
 
