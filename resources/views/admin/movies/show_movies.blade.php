@@ -39,6 +39,7 @@
                             <th>صورة الفيلم</th>
                             <th>قصة الفيلم</th>
                             <th>تاريخ النشر</th>
+                            <th>صفة الفيلم</th>
                             <th>نوع الفيلم</th>
                             <th>العمليات</th>
 
@@ -51,6 +52,16 @@
                                 <td>  <img class=" card-img " src="{{asset('images')}}/{{$movie->imgPath}}" style="width:250px"> </td>
                                 <td>{{$movie->description}}</td>
                                 <td>{{$movie->releaseDate}}</td>
+
+                                <td>
+                                    @foreach($movie->types as $type)
+                                        <p class="btn-sm btn-secondary d-inline-block  shadow-sm">
+                                            {{$type->name}}
+                                        </p>
+
+                                    @endforeach
+                                </td>
+
                                 <td>
                                     @foreach($movie->genres as $genre)
                                         <p class="btn-sm btn-secondary d-inline-block  shadow-sm">
@@ -59,6 +70,7 @@
 
                                     @endforeach
                                 </td>
+
                                 <td>
                                     <div>
 
