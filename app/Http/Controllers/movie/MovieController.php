@@ -35,6 +35,7 @@ class MovieController extends Controller
 
 
         $movies->genres()->attach($request->genres);
+        $movies->types()->attach($request->types);
 
         return back()->with('success_add_movie','تم أضافة الفيلم بنجاح');
     }
@@ -90,6 +91,11 @@ class MovieController extends Controller
         //sync to delete unselected genres from db  and keep/adding new genres.
         if ($request->has('genres')){
             $movie->genres()->sync($request->genres);
+
+        }
+
+        if ($request->has('types')){
+            $movie->types()->sync($request->types);
 
         }
 
