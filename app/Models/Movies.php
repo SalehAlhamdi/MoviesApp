@@ -10,16 +10,20 @@ class Movies extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable=[
-      'title','description','releaseDate' ,'imgPath','movPath'
+      'title','description','releaseDate' ,'imgPath','movPath','movie_type'
     ];
 
     public function genres(){
         return $this->belongsToMany(Genres::class);
     }
 
-    public function hasGenre($id){
-        return in_array($id,$this->genres->pluck('id')->toArray());
+    public function checkIfHas($id,$object){
+        return in_array($id,$this->$object->pluck('id')->toArray());
 
+    }
+
+    public function types(){
+        return $this->belongsToMany(Types::class);
     }
 
 }
