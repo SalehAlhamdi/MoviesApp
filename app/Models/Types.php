@@ -15,4 +15,8 @@ class Types extends Model
     public function movies(){
         return $this->belongsToMany(Movies::class);
     }
+
+    public function tvShows(){
+        return $this->belongsToMany(TvShows::class);
+    }
 }
