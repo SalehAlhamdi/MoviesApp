@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{asset('select2/select2.min.css')}}">
     <script src="{{asset('select2/select2.min.js')}}"></script>
 
-    
+
     <script src="{{asset('admin/vendor/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('admin/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
 
@@ -106,12 +106,16 @@
                 <i class="fas fa-fw fa-tv"></i>
                 <span>المسلسلات</span>
             </a>
-            <div id="collapseTvShow" class="collapse" aria-labelledby="headingTvShow"
+            <div id="collapseTvShow" class="collapse @if(Route::is('dashboard.create.tvShow')||Route::is('dashboard.show.tvShow')||Route::is('dashboard.tvShow_trashed')||Route::is('dashboard.create.episode')) show @endif " aria-labelledby="headingTvShow"
                  data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">:العناصر</h6>
-                    <a class="collapse-item" href="buttons.html">أضافة مسلسل</a>
-                    <a class="collapse-item" href="cards.html">عرض جميع مسلسلات</a>
+                    <a class="collapse-item @if(Route::is('dashboard.create.tvShow')) active @endif" href="{{route('dashboard.create.tvShow')}}">أضافة مسلسل</a>
+                    <a class="collapse-item @if(Route::is('dashboard.create.episode')) active @endif" href="{{route('dashboard.create.episode')}}">أضافة حلقة</a>
+
+                    <a class="collapse-item @if(Route::is('dashboard.show.tvShow')) active @endif" href="{{route('dashboard.show.tvShow')}}">عرض جميع مسلسل</a>
+                    <a class="collapse-item @if(Route::is('dashboard.tvShow_trashed')) active @endif" href="{{route('dashboard.tvShow_trashed')}}">سلة المحذوفات</a>
+
                 </div>
             </div>
         </li>

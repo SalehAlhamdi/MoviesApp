@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genres extends Model
+class Episodes extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'name'
+        'ep_num',
+        'season',
+        'vidPath',
+        'tv_shows_id'
     ];
-    public function movies(){
-        return $this->belongsToMany(Movies::class);
-    }
 
     public function tvShows(){
-        return $this->belongsToMany(TvShows::class);
+        return $this->belongsTo(TvShows::class);
     }
 }

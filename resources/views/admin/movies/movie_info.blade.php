@@ -26,7 +26,7 @@
                                  <div class="card-body">
                                      <div class="text-center">
                                          <img class="img-fluid px-sm-4 mt-3 mb-4" width="400"
-                                              src="{{asset('images')}}/{{$movie->imgPath}}" alt="...">
+                                              src="{{asset('images/movies')}}/{{$movie->imgPath}}" alt="...">
                                      </div>
                                  </div>
                              </div>
@@ -50,7 +50,7 @@
                                  </div>
                                  <div class="card-body">
                                      <video width="100%"  controls autoplay>
-                                         <source src="{{asset('movies')}}/{{$movie->movPath}}" type="video/mp4">
+                                         <source src="{{asset('videos/movies')}}/{{$movie->movPath}}" type="video/mp4">
                                      </video>
                                  </div>
                              </div>

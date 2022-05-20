@@ -42,6 +42,13 @@ class MovieController extends Controller
     public function delete_movie($id){
         $movie=Movies::withTrashed()->where('id', $id)->firstOrFail();
         if($movie->trashed()){
+            if (file_exists(asset('videos/movies/'.$movie->movPath))){
+                unlink(asset('videos/movies/'.$movie->movPath));
+            }
+            if (file_exists(asset('images/movies/'.$movie->imgPath))){
+                unlink(asset('images/movies/'.$movie->imgPath));
+            }
+
             $movie->forceDelete();
             return back()->with('movie_prem_deleted','تم حذف الفيلم نهائياً بنجاح');
 
