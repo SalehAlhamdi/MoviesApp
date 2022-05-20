@@ -39,8 +39,8 @@
                             <th>صورة الفيلم</th>
                             <th>قصة الفيلم</th>
                             <th>تاريخ النشر</th>
-                            <th>صفة الفيلم</th>
                             <th>نوع الفيلم</th>
+                            <th>تصنيف الفيلم</th>
                             <th>العمليات</th>
 
                         </tr>
@@ -49,7 +49,7 @@
                         @foreach($movies as $movie)
                             <tr class="text-center">
                                 <td>{{$movie->title}}</td>
-                                <td>  <img class=" card-img " src="{{asset('images')}}/{{$movie->imgPath}}" style="width:250px"> </td>
+                                    <td>  <img class=" card-img " src="{{asset('images/movies')}}/{{$movie->imgPath}}" style="width:250px"> </td>
                                 <td>{{$movie->description}}</td>
                                 <td>{{$movie->releaseDate}}</td>
 

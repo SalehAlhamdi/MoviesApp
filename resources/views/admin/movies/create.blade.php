@@ -21,16 +21,6 @@
 
 @endif
 
-@section('collapse')
-    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">:العناصر</h6>
-            <a class="collapse-item active" href="{{route('dashboard.create')}}">أضافة فلم</a>
-            <a class="collapse-item" href="{{route('dashboard.show.movie')}}">عرض جميع الافلام</a>
-        </div>
-    </div>
-@endsection
-
 @section('content')
 
     @if(session()->has('success_add_movie'))
@@ -54,12 +44,13 @@
                         <h6 class="m-0 font-weight-bold text-primary">أضافة فيلم</h6>
                     </div>
                     <div class="card-body">
+
+                        @if($errors->any())
+                            <div class="alert alert-danger text-center">الرجاء التأكيد من ملئ جميع المعلومات</div>
+                        @endif
+
                         <form method="post" class="user" action="{{route('dashboard.store_movie')}}" enctype="multipart/form-data" >
                             @csrf
-
-                            @error('movie_title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group">
                                 <input  placeholder="عنوان الفيلم" type="text" class="form-control form-control-user" name="movie_title">
@@ -68,18 +59,12 @@
 
                             <hr class="sidebar-divider">
 
-                            @error('movie_rela')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="col-sm-6 mb-3 mb-sm-0 mx-auto">
                                 <input type="text" name="movie_rela" class="form-control form-control-user text-center" placeholder="تاريخ أصدار الفيلم">
                             </div>
 
                             <hr class="sidebar-divider">
-                            @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group mt-3">
                                 <label for="formFileSm" class="form-label">صورة الفيلم</label>
@@ -91,9 +76,6 @@
 
                             <hr class="sidebar-divider">
 
-                            @error('movie')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group mt-3">
                                 <label for="formFileSm" class="form-label">أختيار  الفيلم</label>
@@ -120,9 +102,6 @@
 
                             <hr class="sidebar-divider mx-auto">
 
-                            @error('types')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             @if($types->count()>0)
                                 <hr class="sidebar-divider">
@@ -143,10 +122,6 @@
 
                             <hr class="sidebar-divider mx-auto">
 
-
-                            @error('movie_description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-floating py-3">
                                 <textarea class="form-control text-right" placeholder="...قصة الفيلم" name="movie_description" style="height: 200px"></textarea>
@@ -172,25 +147,21 @@
                     <div class="card-header py-3 px-5 text-center">
                         <h6 class="m-0 font-weight-bold text-primary">تعديل الفيلم</h6>
                     </div>
+                    @if($errors->any())
+                        <div class="alert alert-danger text-center">الرجاء التأكيد من ملئ جميع المعلومات</div>
+                    @endif
                     <div class="card-body">
                         <form method="post" class="user" action="{{route('dashboard.update_movie',$movies->id)}}" enctype="multipart/form-data" >
                             @csrf
 
                             <div class="h5 text-center font-weight-bold text-gray-800">أسم الفيلم</div>
 
-                            @error('movie_title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group mt-4">
                                 <input  value="{{$movies->title}}" type="text" id="movie_title" class="text-center  form-control form-control-user " style="font-size: 20px" name="movie_title">
                             </div>
 
                             <hr class="sidebar-divider mt-4">
-
-                            @error('movie_rela')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="h5 text-center font-weight-bold text-gray-800">سنة الاصدار</div>
 
@@ -199,9 +170,6 @@
                             </div>
 
                             <hr class="sidebar-divider mt-4">
-                            @error('image')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group mt-4">
                                 <div class="h5 text-center font-weight-bold text-gray-800">صورة الفيلم</div>
@@ -214,9 +182,6 @@
 
                             <hr class="sidebar-divider">
 
-                            @error('movie')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group mt-3">
                                 <div class="h5 text-center font-weight-bold text-gray-800">أختيار الفيلم</div>
@@ -226,36 +191,47 @@
 
                                 <hr class="sidebar-divider mt-4">
 
-                            @error('genres')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
+                            @if($movies->genres()->count()>0)
 
                                 <div class="form-group">
-                                    <div class="h5 text-gray-800">صفات الفيلم</div>
+                                    <div class="h5 text-gray-800">تصنيف الفيلم</div>
 
                                     <select name="genres[]" id="genres" class="form-control genre-selector" multiple>
                                         @foreach($genres as $genre)
 
                                             <option value="{{$genre->id}}" @if($movies->checkIfHas($genre->id,'genres')) selected @endif>
-                                                    {{$genre->name}}
+                                                {{$genre->name}}
                                             </option>
-
-
                                         @endforeach
                                     </select>
                                 </div>
 
-                            <hr class="sidebar-divider mt-4">
+                            @else
 
-                            @error('types')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                                <div class="form-group">
+                                    <div class="h5 text-gray-800">تصنيف الفيلم</div>
+                                    <select name="genres[]" id="genres" class="form-control genre-selector" multiple>
+                                        @foreach($genres as $genre)
+
+                                            <option value="{{$genre->id}}">
+
+                                                {{$genre->name}}
+
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            @endif
+
+                            <hr class="sidebar-divider mt-4">
 
                             @if($movies->types()->count()>0)
                                 <div class="form-group">
-                                    <div class="h5 text-gray-800">صفات الفيلم</div>
+                                    <div class="h5 text-gray-800">نوع الفيلم</div>
 
-                                    <select name="types[]" id="types" class="form-control genre-selector" multiple>
+                                    <select name="types[]" id="types" class="form-control genre-selector">
                                         @foreach($types as $type)
 
                                             <option value="{{$type->id}}" @if($movies->checkIfHas($type->id,'types')) selected @endif>
@@ -268,7 +244,6 @@
                                 </div>
                             @else
 
-                                <hr class="sidebar-divider">
                                 <div class="form-group">
                                     <label> نوع الفيلم</label>
                                     <select name="types[]" id="types" class="form-control genre-selector">
@@ -287,9 +262,6 @@
 
                             <hr class="sidebar-divider mx-auto">
 
-                            @error('movie_description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="h5 text-center font-weight-bold text-gray-800">وصف الفيلم</div>
                             <div class="form-floating py-3">

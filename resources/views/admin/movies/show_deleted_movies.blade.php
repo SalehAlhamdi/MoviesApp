@@ -35,7 +35,6 @@
 
 
     @if($movies->count()>0)
-        @foreach($movies as $movie)
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">الجدول</h1>
 
@@ -62,7 +61,7 @@
                             @foreach($movies as $movie)
                                 <tr class="text-center">
                                     <td>{{$movie->title}}</td>
-                                    <td>  <img class="card-img " src="{{asset('images')}}/{{$movie->imgPath}}" width="200px"> </td>
+                                    <td>  <img class="card-img " src="{{asset('images/movies')}}/{{$movie->imgPath}}" width="200px"> </td>
                                     <td>{{$movie->description}}</td>
                                     <td>{{$movie->releaseDate}}</td>
                                     <td>
@@ -114,7 +113,6 @@
                     </div>
                 </div>
             </div>
-        @endforeach
     @else
         <div class="card shadow mb-4">
             <div class="card-header py-3">
