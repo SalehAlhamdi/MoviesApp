@@ -1,15 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\tvShow;
-
+use App\Http\Controllers\Lib\FunctionsHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\movie\UpdateRequest;
 use App\Http\Requests\tvShow\StoreTvShowRequest;
-use App\Http\Requests\tvShow\UpdateTvShoeRequest;
 use App\Http\Requests\tvShow\UpdateTvShowRequest;
 use App\Models\TvShows;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class TvShowController extends Controller
 {
@@ -36,8 +32,8 @@ class TvShowController extends Controller
     public function delete_tvShow($id){
         $tvShow=TvShows::withTrashed()->where('id', $id)->firstOrFail();
         if($tvShow->trashed()){
-            if (file_exists(asset('images/TvShows/'.$tvShow->imgPath))){
-                File::delete(asset('images/TvShows/'.$tvShow->imgPath));
+            if (file_exists('images/TvShows/'.$tvShow->imgPath)){
+                unlink('images/TvShows/'.$tvShow->imgPath);
             }
             $tvShow->forceDelete();
             return back()->with('tvShow_prem_deleted','تم حذف المسلسل نهائياً بنجاح');
@@ -58,14 +54,16 @@ class TvShowController extends Controller
     }
 
     public function update_tvShow($id,UpdateTvShowRequest $request){
+
         $tvShow = TvShows::where('id',$id)->firstOrFail();
 
         $imgname=$tvShow->imgPath;
 
         //images
+
         if ($request->hasFile('image')){
-            if (asset('images/TvShows/'.$request->image) != asset('images/TvShows/'.$tvShow->imgPath)){
-                File::delete(asset('images/TvShows/'.$tvShow->imgPath));
+            if (!file_exists('images/tvShows/'.$request->image->getClientOriginalName())){
+                unlink('images/TvShows/'.$tvShow->imgPath);
             }
 
             $img=$request->file('image');
