@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\dashboard\MoviesViewController;
 use App\Http\Controllers\dashboard\TvShowViewController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\movie\MovieController;
+use App\Http\Controllers\Permissions\PermissionsController;
 use App\Http\Controllers\tvshow\EpisodesController;
 use App\Http\Controllers\tvShow\TvShowController;
+use App\Http\Controllers\users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,10 +33,10 @@ Auth::routes();
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function (){
 
     //Dashboard Main Screen
-    Route::get('/index',[MoviesViewController::class,'index'])->name('index');
+    Route::get('/index',[HomeController::class,'index'])->name('index');
 
 
-    //    operations for movies section
+    //    Functions for movies section
     Route::post('/store',[MovieController::class,'store_movie'])->name('store_movie');
     Route::delete('/delete/{id}',[MovieController::class,'delete_movie'])->name('delete_movie');
     Route::post('/restore/{id}',[MovieController::class,'restore_trashed_movies'])->name('restore_movies');
@@ -59,8 +60,8 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
     Route::get('/info/TvShow/{id}',[TvShowViewController::class,'tvShow_info'])->name('tvShow.info');
     Route::get('/Single/TvShow/{id}',[TvShowViewController::class,'update_tvShow'])->name('tvShow.update');
 
-    //    operations for TvShow section
-    Route::post('/store/TvShow',[TvShowController::class,'store_tvShow'])->name('store_movie');
+    //    Functions for TvShow section
+    Route::post('/store/TvShow',[TvShowController::class,'store_tvShow'])->name('store_tvShow');
     Route::delete('/delete/TvShow/{id}',[TvShowController::class,'delete_tvShow'])->name('delete_tvShow');
     Route::post('/restore/TvShow/{id}',[TvShowController::class,'restore_trashed_tvShow'])->name('restore_tvShow');
     Route::put('/update/TvShow/{id}',[TvShowController::class,'update_tvShow'])->name('edit_tvShow');
@@ -68,6 +69,25 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
     // Episodes Functions
     Route::post('/add/Episode',[EpisodesController::class,'store_ep'])->name('add.episode');
     Route::delete('/delete/Episode/{id}',[EpisodesController::class,'delete_ep'])->name('delete.episode');
+
+
+    //permission that for admin
+    Route::group(['middleware' => ['can:manage accounts']], function () {
+
+        //users views
+        Route::get('/update/user',[UsersController::class,'update_user_view'])->name('update.user');
+        Route::get('/edit/users/{user}',[UsersController::class,'edit_users_view'])->name('edit_view.users');
+        Route::get('/users',[UsersController::class,'all_users'])->name('all.users');
+
+        //users functions
+        Route::post('/user/update',[UsersController::class,'update_current_user'])->name('update_user');
+        Route::post('/user/edit/{user}',[UsersController::class,'edit_user'])->name('edit_user');
+        Route::delete('/user/deleted/{user}',[UsersController::class,'delete_user'])->name('delete.user');
+
+        //permissions and roles section
+        Route::put('/user/permission/give/{user}',[PermissionsController::class,'give_User_Permissions'])->name('give.perm');
+        Route::put('/user/permission/remove/{user}',[PermissionsController::class,'remove_User_Permissions'])->name('remove.perm');
+    });
 
 
 });
