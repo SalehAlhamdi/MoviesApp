@@ -14,11 +14,13 @@
     <script src="{{asset("admin/vendor/jquery/jquery.min.js")}}"></script>
     <script src="{{asset("admin/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
-    <!-- Core plugin JavaScript-->
+
+
+
+<!-- Core plugin JavaScript-->
     <script src="{{asset("admin/vendor/jquery-easing/jquery.easing.min.js")}}"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="{{asset("admin/js/sb-admin-2.min.js")}}"></script>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset("admin/vendor/fontawesome-free/css/all.min.css")}}"  rel="stylesheet" type="text/css">
@@ -120,68 +122,39 @@
             </div>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAnime"
-               aria-expanded="true" aria-controls="collapseAnime">
-                <i class="fas fa-fw fa-tv"></i>
-                <span>الانميات</span>
-            </a>
-            <div id="collapseAnime" class="collapse" aria-labelledby="headingAnime"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">:العناصر</h6>
-                    <a class="collapse-item" href="buttons.html">أضافة انمي</a>
-                    <a class="collapse-item" href="cards.html">عرض جميع الانميات</a>
-                </div>
-            </div>
-        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
+
+
+    @can('manage accounts')
         <!-- Heading -->
-        <div class="sidebar-heading">
-            اخرى
-        </div>
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseDrama" aria-expanded="true"
-               aria-controls="collapseDrama">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>مسرحيات</span>
-            </a>
-
-            <div id="collapseDrama" class="collapse" aria-labelledby="headingDrama"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">:العناصر</h6>
-                    <a class="collapse-item" href="buttons.html">أضافة مسرحية</a>
-                    <a class="collapse-item" href="cards.html">عرض جميع المسرحيات</a>
-                </div>
+            <div class="sidebar-heading">
+                اخرى
             </div>
-        </li>
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin"
-               aria-expanded="true" aria-controls="collapseAdmin">
-                <i class="fas fa-fw fa-user-secret"></i>
-                <span>المشرف</span>
-            </a>
-            <div id="collapseAdmin" class="collapse" aria-labelledby="headingAdmin"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">:العناصر</h6>
-                    <a class="collapse-item" href="buttons.html">أضافة مستخدم</a>
-                    <a class="collapse-item" href="cards.html">عرض جميع المستخدمين</a>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin"
+                   aria-expanded="true" aria-controls="collapseAdmin">
+                    <i class="fas fa-fw fa-user-secret"></i>
+                    <span>المشرف</span>
+                </a>
+                <div id="collapseAdmin" class="collapse @if(Route::is('dashboard.update.user')||Route::is('register')||Route::is('dashboard.all.users')) show @endif" aria-labelledby="headingAdmin"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">:العناصر</h6>
+                        <a class="collapse-item @if(Route::is('register')) active @endif " href="{{route('register')}}">أضافة حساب جديد</a>
+
+                        <a class="collapse-item @if(Route::is('dashboard.update.user')) active @endif " href="{{route('dashboard.update.user')}}">التعديل على حسابي</a>
+                        <a class="collapse-item @if(Route::is('dashboard.all.users')) active @endif " href="{{route('dashboard.all.users')}}">عرض جميع الحسابات</a>
+                    </div>
                 </div>
-            </div>
-        </li>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+    @endcan
 
-
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -264,6 +237,8 @@
 
 
 </div>
+
+<script src="{{asset("admin/js/sb-admin-2.min.js")}}"></script>
 </body>
 
 </html>

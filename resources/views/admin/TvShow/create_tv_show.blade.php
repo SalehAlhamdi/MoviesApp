@@ -25,12 +25,12 @@
 
     @if(session()->has('success_add_movie'))
         <div class="container text-center my-3">
-            <a href="" class="btn btn-success btn-lg btn-icon-split ">
+            <p href="" class="btn btn-success btn-lg btn-icon-split ">
                 <span class="icon text-white-5  0">
                     <i class="fas fa-check"></i>
                 </span>
                 <span class="text">{{session()->get('success_add_movie')}}</span>
-            </a>
+            </p>
         </div>
     @endif
 
@@ -41,23 +41,20 @@
                     <div class="card-header py-3 px-5 text-center">
                         <h6 class="m-0 font-weight-bold text-primary">أضافة مسلسل</h6>
                     </div>
-                    <div class="card-body ">
-                        <form method="post" class="user" action="{{route('dashboard.store_movie')}}" enctype="multipart/form-data" >
+                    <div class="card-body" >
+                        <form method="post" class="user" action="{{route('dashboard.store_tvShow')}}" enctype="multipart/form-data" >
                             @csrf
 
-                            @error('title')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            @if($errors->any())
+                                <div class="alert alert-danger text-center">الرجاء التأكيد من ملئ جميع المعلومات</div>
+                            @endif
 
                             <div class="form-group">
-                                <input  placeholder="اسم المسلسل" type="text" class="form-control  form-control-user text-center " name="title">
+                                <input  placeholder="اسم المسلسل" type="text" class="form-control form-control-user text-center" name="title" style="font-size: 18px">
                             </div>
 
 
                             <hr class="sidebar-divider">
-                            @error('image')
-                            <div class="alert alert-danger text-center">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-group ">
                                 <label for="formFileSm" class="form-label ">صورة المسلسل</label>
@@ -90,9 +87,6 @@
                                 <input  placeholder="رقم الموسم" type="text" class="form-control text-center" name="season">
                             </div>
 
-                            @error('types')
-                            <div class="alert alert-danger text-center">{{ $message }}</div>
-                            @enderror
 
                             @if($types->count()>0)
                                 <hr class="sidebar-divider">
@@ -113,9 +107,6 @@
                             <hr class="sidebar-divider mx-auto">
 
 
-                            @error('description')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 
                             <div class="form-floating">
                                 <textarea class="form-control text-right" placeholder="...قصة المسلسل" name="description" style="height: 200px"></textarea>

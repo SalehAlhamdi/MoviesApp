@@ -56,9 +56,7 @@
                                 <input  placeholder="عنوان الفيلم" type="text" class="form-control form-control-user" name="movie_title">
                             </div>
 
-
                             <hr class="sidebar-divider">
-
 
                             <div class="col-sm-6 mb-3 mb-sm-0 mx-auto">
                                 <input type="text" name="movie_rela" class="form-control form-control-user text-center" placeholder="تاريخ أصدار الفيلم">

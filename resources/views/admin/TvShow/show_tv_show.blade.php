@@ -133,7 +133,7 @@
     @else
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h1 class="h3 mb-2 text-gray-800 text-center">لايوجد افلام حالياً</h1>
+                <h1 class="h3 mb-2 text-gray-800 text-center">لايوجد مسلسلات حالياً حالياً</h1>
             </div>
             <div class="card-body">
             </div>
