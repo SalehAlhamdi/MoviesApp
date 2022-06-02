@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movies;
+use App\Models\TvShows;
 use Illuminate\Http\Request;
+use PHPUnit\Framework\Exception;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+
+        $movies = Movies::all();
+        $tvShows=TvShows::all();
+
+        return view('admin.index', compact('movies','tvShows'));
     }
 }
