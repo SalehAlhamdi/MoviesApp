@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\test;
 use App\Models\Genres;
 use App\Models\Movies;
 use App\Models\TvShows;

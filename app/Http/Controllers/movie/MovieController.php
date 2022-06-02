@@ -5,10 +5,7 @@ namespace App\Http\Controllers\movie;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\movie\StoreMovieRequest;
 use App\Http\Requests\movie\UpdateRequest;
-use App\Models\Genres;
 use App\Models\Movies;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 
 class MovieController extends Controller
 {
@@ -18,12 +15,12 @@ class MovieController extends Controller
         if ($request->hasFile('image')){
             $img=$request->file('image');
             $imgname=time().'.'.$img->extension();
-            $img->move(public_path('images'),$imgname);
+            $img->move(public_path('images/movies/'),$imgname);
         }
         if ($request->hasFile('movie')) {
             $mov = $request->file('movie');
             $movname = time() . '.' . $mov->extension();
-            $mov->move(public_path('movies'), $movname);
+            $mov->move(public_path('videos/movies/'), $movname);
         }
         $movies=Movies::create([
            'title'=>$request->movie_title,
@@ -42,11 +39,11 @@ class MovieController extends Controller
     public function delete_movie($id){
         $movie=Movies::withTrashed()->where('id', $id)->firstOrFail();
         if($movie->trashed()){
-            if (file_exists(asset('videos/movies/'.$movie->movPath))){
-                unlink(asset('videos/movies/'.$movie->movPath));
+            if (file_exists('videos/movies/'.$movie->movPath)){
+                unlink('videos/movies/'.$movie->movPath);
             }
-            if (file_exists(asset('images/movies/'.$movie->imgPath))){
-                unlink(asset('images/movies/'.$movie->imgPath));
+            if (file_exists('images/movies/'.$movie->imgPath)){
+                unlink('images/movies/'.$movie->imgPath);
             }
 
             $movie->forceDelete();
@@ -75,24 +72,24 @@ class MovieController extends Controller
 
         //images
         if ($request->hasFile('image')){
-            if (!asset('images/'.$request->image) != asset('images/'.$movie->imgPath)){
-                File::delete(asset('images/'.$movie->imgPath));
+            if (!file_exists('images/movies/'.$request->image->getClientOriginalName())){
+                unlink('images/movies/'.$imgname);
             }
 
             $img=$request->file('image');
             $imgname=time().'.'.$img->extension();
-            $img->move(public_path('images'),$imgname);
+            $img->move(public_path('images/movies/'),$imgname);
         }
 
         //movies
         if ($request->hasFile('movie')) {
-            if (!asset('images/'.$request->movie) != asset('images/'.$movie->movPath)){
-                File::delete(asset('images/'.$movie->movPath));
+            if (!file_exists('videos/movies/'.$request->movie->getClientOriginalName())){
+                unlink('videos/movies/'.$movname);
             }
 
             $mov = $request->file('movie');
             $movname = time() . '.' . $mov->extension();
-            $mov->move(public_path('movies'), $movname);
+            $mov->move(public_path('videos/movies/'), $movname);
         }
 
         //sync to delete unselected genres from db  and keep/adding new genres.
