@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\dashboard\MoviesViewController;
-use App\Http\Controllers\dashboard\TvShowViewController;
+use App\Http\Controllers\AdminDashboard\dashboard\MoviesViewController;
+use App\Http\Controllers\AdminDashboard\dashboard\TvShowViewController;
+use App\Http\Controllers\AdminDashboard\movie\MovieController;
+use App\Http\Controllers\AdminDashboard\Permissions\PermissionsController;
+use App\Http\Controllers\AdminDashboard\tvShow\EpisodesController;
+use App\Http\Controllers\AdminDashboard\tvShow\TvShowController;
+use App\Http\Controllers\AdminDashboard\users\UsersController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\movie\MovieController;
-use App\Http\Controllers\Permissions\PermissionsController;
-use App\Http\Controllers\tvshow\EpisodesController;
-use App\Http\Controllers\tvShow\TvShowController;
-use App\Http\Controllers\users\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
