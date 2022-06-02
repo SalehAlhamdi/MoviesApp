@@ -29,7 +29,7 @@ class StoreTvShowRequest extends FormRequest
             'genres'=>'required',
             'types'=>'required',
             'season'=>'required',
-            'imgPah'=>'required'
+            'image'=>'required'
         ];
     }
 }

@@ -25,7 +25,7 @@ class StoreMovieRequest extends FormRequest
     {
         return [
             'movie_title' => 'required|max:100',
-            'movie_description' => 'required|max:2000',
+            'movie_description' => 'required',
             'movie_rela'=>'required|max:5',
             'genres'=>'required',
             'types'=>'required',
