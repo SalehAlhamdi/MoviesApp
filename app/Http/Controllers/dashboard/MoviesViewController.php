@@ -8,6 +8,8 @@ use App\Models\Movies;
 use App\Models\TvShows;
 use App\Models\Types;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class MoviesViewController extends Controller
 {
@@ -20,12 +22,7 @@ class MoviesViewController extends Controller
     ///////////////////////////////
     ///Functions for Movies Section
     ///////////////////////////////
-    public function index()
-    {
-        $movies = Movies::all();
-        $tvShows=TvShows::all();
-        return response(view('admin.index', compact('movies','tvShows')));
-    }
+
 
     public function create_movie()
     {
