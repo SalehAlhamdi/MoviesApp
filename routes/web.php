@@ -2,12 +2,13 @@
 
 use App\Http\Controllers\AdminDashboard\dashboard\MoviesViewController;
 use App\Http\Controllers\AdminDashboard\dashboard\TvShowViewController;
+use App\Http\Controllers\AdminDashboard\HomeController;
 use App\Http\Controllers\AdminDashboard\movie\MovieController;
 use App\Http\Controllers\AdminDashboard\Permissions\PermissionsController;
 use App\Http\Controllers\AdminDashboard\tvShow\EpisodesController;
 use App\Http\Controllers\AdminDashboard\tvShow\TvShowController;
 use App\Http\Controllers\AdminDashboard\users\UsersController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MainView\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,13 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-//    if (auth()->user()){
-//        auth()->user()->assignRole('superAdmin');
-//    }
-
-    return view('movie.home');
-});
+Route::get('/',[MainController::class,'main'])->name('main_page');
 
 Auth::routes();
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function (){
