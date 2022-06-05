@@ -3,7 +3,7 @@
 \*-------------------------------------*/
 
 /**
- * copyright 2021 @codewithsadee 
+ * copyright 2021 @codewithsadee
  */
 
 
@@ -15,7 +15,7 @@
 \*-------------------------------------*/
 
 /**
- * import variables.css file 
+ * import variables.css file
  */
 
 @import url(./variable.css);
@@ -29,7 +29,7 @@
 \*-------------------------------------*/
 
 /**
- * import reset.css file 
+ * import reset.css file
  */
 
 @import url(./reset.css);
@@ -71,7 +71,7 @@ header, nav { background: var(--rich-black-fogra-29); }
 \*-------------------------------------*/
 
 /**
- * main container style 
+ * main container style
  */
 
 .container {
@@ -88,7 +88,7 @@ header, nav { background: var(--rich-black-fogra-29); }
 \*-------------------------------------*/
 
 /**
- * navbar style 
+ * navbar style
  */
 
 .navbar {
@@ -99,13 +99,13 @@ header, nav { background: var(--rich-black-fogra-29); }
 }
 
 /**
- * small screen menu button style 
+ * small screen menu button style
  */
 
 .navbar-menu-btn { display: none; }
 
 /**
- * navbar navigation style 
+ * navbar navigation style
  */
 
 nav { margin-right: 200px; }
@@ -122,7 +122,7 @@ nav { margin-right: 200px; }
 .navbar-link:hover { color: var(--light-azure); }
 
 /**
- * live indicator style 
+ * live indicator style
  */
 
 .indicator { position: relative; }
@@ -140,7 +140,7 @@ nav { margin-right: 200px; }
 }
 
 /**
- * navbar form & button style 
+ * navbar form & button style
  */
 
 .navbar-actions {
@@ -182,7 +182,7 @@ nav { margin-right: 200px; }
 
 /**
  * navbar-form close button & navbar search button
- * for small device 
+ * for small device
  */
 
 .navbar-form-close,
@@ -212,7 +212,7 @@ nav { margin-right: 200px; }
 \*-------------------------------------*/
 
 /**
- * banner card style 
+ * banner card style
  */
 
 .banner { margin-bottom: 60px; }
@@ -227,7 +227,7 @@ nav { margin-right: 200px; }
 
 .banner-img { object-position: top; }
 
-.banner-card:hover .banner-img { transform: scale(1.1); }
+.banner-card:hover .banner-img { transform: scale(5.1); }
 
 .banner-card .card-content {
   position: absolute;
@@ -326,7 +326,7 @@ nav { margin-right: 200px; }
 input ~ .checked-radio-bg {
   /**
    * variable for changing position and size
-   * besed on radio checked 
+   * besed on radio checked
    */
   --width: 85px;
   --left:   5px;
@@ -352,7 +352,7 @@ input ~ .checked-radio-bg {
 
 
 /**
- * movies grid 
+ * movies grid
  */
 
 .movies-grid {
@@ -364,7 +364,7 @@ input ~ .checked-radio-bg {
 
 .movie-card {
   /**
-   * variable for scaling overlay element on card hover 
+   * variable for scaling overlay element on card hover
    */
   --scale: 0.8;
 
@@ -459,7 +459,7 @@ input ~ .checked-radio-bg {
 
 
 /**
- * load more button 
+ * load more button
  */
 
 .load-more {
@@ -605,7 +605,7 @@ input ~ .checked-radio-bg {
 
 .live-card:hover .play {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1); 
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .live-card .card-body {
