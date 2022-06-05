@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\AdminDashboard;
 
+use App\Http\Controllers\Controller;
 use App\Models\Movies;
 use App\Models\TvShows;
-use Illuminate\Http\Request;
-use PHPUnit\Framework\Exception;
+use function view;
 
 class HomeController extends Controller
 {
