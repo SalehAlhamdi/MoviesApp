@@ -4,8 +4,14 @@ MoviesApp Project uses as local webserver to watch movies offline in mikrotik ne
 
 ## Languages used
 
-PHP,JavaScript,Html as Markup language,CSS as language we use to style an HTML.
+PHP,JavaScript,Html as Markup language,CSS as language we used to style an HTML.
 
 ## Created By
 
 This Project Created by Saleh Alhamdi 
+
+## Requires
+GetID3 package
+
+Laravel-permission - Spatie
+
