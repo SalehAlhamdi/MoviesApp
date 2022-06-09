@@ -123,6 +123,7 @@
 
                                 <div class="card-meta">
                                     <div class="badge badge-outline">الجودة {{getResolution('videos/movies/'.$recentMovie->movPath)}}</div>
+                                    <div class="badge badge-outline">{{$recentMovie->types[0]->name}}</div>
 
                                     <div class="duration">
                                         <ion-icon name="time-outline"></ion-icon>
@@ -209,6 +210,7 @@
 
                             <div class="card-meta">
                                 <div class="badge badge-outline">الجودة {{getResolution('videos/movies/'.$movie->movPath)}}</div>
+                                <div class="badge badge-outline">{{$movie->types[0]->name}}</div>
 
                                 <div class="duration">
                                     <ion-icon name="time-outline"></ion-icon>
@@ -268,6 +270,7 @@
 
                         <div class="card-meta">
                             <div class="badge badge-outline">720 الجودة</div>
+                            <div class="badge badge-outline">{{$tvShow->types[0]->name}}</div>
 
                             <div class="duration">
                                 <data>{{'الموسم  '.$tvShow->season}}</data>

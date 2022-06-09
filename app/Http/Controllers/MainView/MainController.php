@@ -10,8 +10,8 @@ use App\Models\TvShows;
 class MainController extends Controller
 {
     public function main(){
-        $recentMovies = Movies::latest()->take(6)->get();
-        $tvShows=TvShows::latest()->with('episodes')->take(8)->get();
+        $recentMovies = Movies::latest()->with('types')->take(6)->get();
+        $tvShows=TvShows::latest()->with('episodes','types')->take(8)->get();
         $movies=Movies::all()->take(8);
         return view('movie.home', compact('recentMovies','movies','tvShows'));
     }
