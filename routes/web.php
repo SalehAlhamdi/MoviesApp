@@ -21,8 +21,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//main view
 Route::get('/',[MainController::class,'main'])->name('main_page');
+Route::get('/Movies',[MainController::class,'all_movies'])->name('all.movies');
+Route::get('/TvShows',[MainController::class,'all_tvShows'])->name('all.tvShows');
+Route::get('/Animes',[MainController::class,'all_animes'])->name('all.animes');
+
+Route::get('/movie/watch/{id}',[MainController::class,'movie_details'])->name('movie.details');
+Route::get('/TvShow/Episodes/{id}',[MainController::class,'tvShow_details'])->name('tvShow.details');
+
+
 
 Auth::routes();
 Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(function (){
@@ -83,6 +91,5 @@ Route::name('dashboard.')->prefix('dashboard')->middleware('auth')->group(functi
         Route::put('/user/permission/give/{user}',[PermissionsController::class,'give_User_Permissions'])->name('give.perm');
         Route::put('/user/permission/remove/{user}',[PermissionsController::class,'remove_User_Permissions'])->name('remove.perm');
     });
-
 
 });

@@ -174,7 +174,7 @@
 
                                 <input class="form-control " name="image" type="file" onchange="preview_file(this)">
                                 <div class="text-center">
-                                    <img  id="preview_img" src="{{asset('images')}}/{{$movies->imgPath}}" width="250" class="my-3  rounded img-fluid">
+                                    <img  id="preview_img" src="{{asset('images/movies')}}/{{$movies->imgPath}}" width="250" class="my-3  rounded img-fluid">
                                 </div>
                             </div>
 

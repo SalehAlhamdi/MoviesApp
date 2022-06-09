@@ -1,516 +1,290 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{asset("movie/assets/images/icon.png")}}" type="image/png">
-    <title>CineFlix</title>
+@extends('layouts.movie_layout')
+@section('title')
+      موفيز ابب
+@endsection
+@section('content')
 
     <!--
-      - custom css link
-    -->
-    <link rel="stylesheet" href="{{asset("movie/assets/css/main.css")}}">
-    <link rel="stylesheet" href="{{asset("movie/assets/css/media_query.css")}}">
+          - #HERO
+        -->
 
-    <!--
-      - google font link
-    -->
-    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900" rel="stylesheet" />
-</head>
+    <section class="hero">
+        <div class="container">
 
-<body>
+            <div class="hero-content">
 
+                <p class="hero-subtitle">MoviesApp</p>
 
+                <h1 class="h1 hero-title">
+                     افلام
+                    ,مسلسلات, انميات و<strong>المزيد</strong>
+                </h1>
 
+                <div class="meta-wrapper">
 
-<!--
-  - main container
--->
-<div class="container">
+                    <div class="badge-wrapper">
+                        <div class="badge badge-fill">PG 18</div>
 
-    <!--
-      - #HEADER SECTION
-    -->
+                        <div class="badge badge-outline">الجودة 720</div>
+                    </div>
 
-    <header class="">
-        <div class="navbar">
+                    <div class="ganre-wrapper">
+                        <a href="#">رومانسي,</a>
 
-            <!--
-              - menu button for small screen
-            -->
-            <button class="navbar-menu-btn">
-                <span class="one"></span>
-                <span class="two"></span>
-                <span class="three"></span>
-            </button>
+                        <a href="#">دراما</a>
+                    </div>
 
+                    <div class="date-time">
 
-            <a href="#" class="navbar-brand">
-                <img src="{{asset("movie/assets/images/logo.png")}}" alt="">
-            </a>
+                        <div>
+                            <ion-icon name="calendar-outline"></ion-icon>
 
-            <!--
-              - navbar navigation
-            -->
+                            <time datetime="2022">2022</time>
+                        </div>
 
-            <nav class="">
-                <ul class="navbar-nav">
+                        <div>
+                            <ion-icon name="time-outline"></ion-icon>
 
-                    <li> <a href="#" class="navbar-link">الرئيسية</a> </li>
-                    <li> <a href="#category" class="navbar-link">الأنواع</a> </li>
+                            <time datetime="PT128M">128 min</time>
+                        </div>
 
-                </ul>
-            </nav>
+                    </div>
 
-            <!--
-              - search and sign-in
-            -->
+                </div>
 
-            <div class="navbar-actions">
+                <button class="btn btn-primary">
+                    <ion-icon name="play"></ion-icon>
 
-                <form action="#" class="navbar-form">
-                    <input type="text" name="search" placeholder="... البحث عن" class="navbar-form-search">
-
-                    <button class="navbar-form-btn">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </button>
-
-                    <button class="navbar-form-close">
-                        <ion-icon name="close-circle-outline"></ion-icon>
-                    </button>
-                </form>
-
-
-                <!--
-                  - search button for small screen
-                -->
-
-                <button class="navbar-search-btn">
-                    <ion-icon name="search-outline"></ion-icon>
+                    <span>المشاهدة الان</span>
                 </button>
-
-                <a href="{{route('login')}}" class="navbar-signin">
-                    <span>تسجيل الدخول</span>
-                    <ion-icon name="log-in-outline"></ion-icon>
-                </a>
 
             </div>
 
         </div>
-    </header>
+    </section>
 
 
 
 
 
     <!--
-      - MAIN SECTION
+      - #UPCOMING
     -->
-    <main>
 
-        <!--
-          - #BANNER SECTION
-        -->
-        <section class="banner">
-            <div class="banner-card">
+    <section class="upcoming">
+        <div class="container">
 
-                <img src="{{asset("images/movies")}}/{{$movies[count($movies)-1]->imgPath}}" class="banner-img" alt="">
+            <div class="flex-wrapper">
 
-                <div class="card-content">
-                    <div class="card-info">
+                <div class="title-wrapper">
+                    <p class="section-subtitle">يعرض الأن</p>
 
-                        <div class="genre">
-                            <ion-icon name="film"></ion-icon>
-                            <span>
-                                @foreach($movies[count($movies)-1]->genres as $genre)
-                                    {{$genre->name}}
-                                @endforeach
-                            </span>
-                        </div>
-
-                        <div class="year">
-                            <ion-icon name="calendar"></ion-icon>
-                            <span>2019</span>
-                        </div>
-
-                        <div class="duration">
-                            <ion-icon name="time"></ion-icon>
-                            <span>2h 11m</span>
-                        </div>
-
-                        <div class="quality">4K</div>
-
-                    </div>
-
-                    <h2 class="card-title">John Wick: Chapter 3 - Parabellum</h2>
+                    <h2 class="h2 section-title">الافلام الحديثة</h2>
                 </div>
 
-            </div>
-        </section>
+                <ul class="filter-list">
 
+                    <li>
+                        <a href="{{route('all.movies')}}" class="filter-btn">افلام</a>
+                    </li>
 
+                    <li>
+                        <button class="filter-btn">مسلسلات</button>
+                    </li>
 
+                    <li>
+                        <button class="filter-btn">انميات</button>
+                    </li>
 
-
-        <!--
-          - #MOVIES SECTION
-        -->
-        <section class="movies">
-
-            <!--
-              - filter bar
-            -->
-            <div class="filter-bar">
-
-                <div class="filter-dropdowns">
-
-                    <select name="genre" class="genre">
-                        <option value="all genres">جميع الانواع</option>
-                        @foreach($genres as $genre)
-                            <option value="action">{{$genre->name}}</option>
-                        @endforeach
-                    </select>
-                    <select name="year" class="year">
-                        <option value="all years">كل السنين</option>
-                        @foreach($years as $year)
-                                <option value="{{$year}}">
-                                    {{$year}}
-                                </option>
-                        @endforeach
-                    </select>
-
-                </div>
-
-                <div class="filter-radios">
-
-                    <input type="radio" name="grade" id="featured" checked>
-                    <label for="featured">Featured</label>
-
-                    <input type="radio" name="grade" id="popular">
-                    <label for="popular">Popular</label>
-
-                    <input type="radio" name="grade" id="newest">
-                    <label for="newest">Newest</label>
-
-                    <div class="checked-radio-bg"></div>
-
-                </div>
+                </ul>
 
             </div>
 
+            <ul class="movies-list  has-scrollbar">
 
-            <!--
-              - movies grid
-            -->
+                @if(count($recentMovies)>5)
 
-            <div class="movies-grid">
+                    @foreach($recentMovies as $recentMovie)
+                        <li>
+                            <div class="movie-card">
+                                <a href="{{route('movie.details',$recentMovie->id)}}">
+                                    <figure class="card-banner">
+                                        <img src="{{asset('images/movies')}}/{{$recentMovie->imgPath}}" alt="{{$recentMovie->title}}">
+                                    </figure>
+                                </a>
+
+                                <div class="title-wrapper">
+                                    <a href="#">
+                                        <h3 class="card-title">{{$recentMovie->title}}</h3>
+                                    </a>
+
+                                    <time datetime="2022">{{$recentMovie->releaseDate}}</time>
+                                </div>
+
+                                <div class="card-meta">
+                                    <div class="badge badge-outline">الجودة {{getResolution('videos/movies/'.$recentMovie->movPath)}}</div>
+
+                                    <div class="duration">
+                                        <ion-icon name="time-outline"></ion-icon>
+
+                                        <time datetime="PT137M">{{getDuration('videos/movies/'.$recentMovie->movPath)}} min</time>
+                                    </div>
+
+                                    <div class="rating">
+                                        <ion-icon name="star"></ion-icon>
+
+                                        <data>N/A</data>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+
+                    @endforeach
+                @endif
+            </ul>
+        </div>
+    </section>
+
+
+
+
+
+    <!--
+      - #SERVICE
+    -->
+
+
+
+    <!--
+      - #TOP RATED
+    -->
+
+    <section class="top-rated">
+        <div class="container">
+
+            <p class="section-subtitle">يعرض حالياً</p>
+
+            <h2 class="h2 section-title">الافلام</h2>
+
+            <ul class="filter-list">
+
+                <li>
+                    <a href="{{route('main_page')}}" class="filter-btn">الرئيسية</a>
+                </li>
+                <li>
+                    <a href="{{route('all.movies')}}" class="filter-btn">الافلام</a>
+                </li>
+
+                <li>
+                    <a href="{{route('all.tvShows')}}" class="filter-btn">المسلسلات</a>
+                </li>
+
+                <li>
+                    <button class="filter-btn">الانميات</button>
+                </li>
+
+
+            </ul>
+
+            <ul class="movies-list">
                 @foreach($movies as $movie)
+                    <li>
+                        <div class="movie-card">
 
-                    <div class="movie-card">
+                            <a href="{{route('movie.details',$movie->id)}}">
 
-                        <div class="card-head">
-                            <img src="{{asset("images/movies")}}/{{$movie->imgPath}}" alt="" class="card-img">
+                                <figure class="card-banner">
+                                    <img src="{{asset('images/movies')}}/{{$movie->imgPath}}" alt="{{$movie->title}}">
+                                </figure>
+                            </a>
 
-                            <div class="card-overlay">
+                            <div class="title-wrapper">
+                                <a href="{{route('movie.details',$movie->id)}}">
+                                    <h3 class="card-title">{{$movie->title}}</h3>
+                                </a>
 
-                                <div class="bookmark">
-                                    <ion-icon name="bookmark-outline"></ion-icon>
+                                <time datetime="{{$movie->releaseDate}}">{{$movie->releaseDate}}</time>
+                            </div>
+
+                            <div class="card-meta">
+                                <div class="badge badge-outline">الجودة {{getResolution('videos/movies/'.$movie->movPath)}}</div>
+
+                                <div class="duration">
+                                    <ion-icon name="time-outline"></ion-icon>
+
+                                    <time datetime="PT122M">{{getDuration('videos/movies/'.$movie->movPath)}} min</time>
                                 </div>
 
                                 <div class="rating">
-                                    <ion-icon name="star-outline"></ion-icon>
-                                    <span>6.8</span>
+                                    <ion-icon name="star"></ion-icon>
+
+                                    <data>N/A</data>
                                 </div>
-
-                                <div class="play">
-                                    <ion-icon name="play-circle-outline"></ion-icon>
-                                </div>
-
                             </div>
+
                         </div>
-
-                        <div class="card-body">
-                            <h3 class="card-title">{{$movie->title}}</h3>
-
-                            <div class="card-info">
-                                <span class="genre" style="font-size: 15px">
-                                    @foreach($movie->genres as $genres)
-                                    {{$genres->name}}
-                                    @endforeach
-                                </span>
-                                <span class="year">2019</span>
-                            </div>
-                        </div>
-
-                    </div>
-
+                    </li>
                 @endforeach
+            </ul>
 
-            </div>
-
-            <!--
-              - load more button
-            -->
-            <button class="load-more">LOAD MORE</button>
-
-        </section>
-
-
-
-
-
-        <!--
-          - #CATEGORY SECTION
-        -->
-        <section class="category" id="category">
-
-            <h2 class="section-heading">Category</h2>
-
-            <div class="category-grid">
-
-                <div class="category-card">
-                    <img src="{{asset("movie/assets/images/action.jpg")}}" alt="" class="card-img">
-                    <div class="name">Action</div>
-                    <div class="total">100</div>
-                </div>
-
-                <div class="category-card">
-                    <img src="{{asset("movie/assets/images/comedy.jpg")}}" alt="" class="card-img">
-                    <div class="name">Comedy</div>
-                    <div class="total">50</div>
-                </div>
-
-                <div class="category-card">
-                    <img src="{{asset("movie/assets/images/thriller.webp")}}" alt="" class="card-img">
-                    <div class="name">Thriller</div>
-                    <div class="total">20</div>
-                </div>
-
-                <div class="category-card">
-                    <img src="{{asset("movie/assets/images/horror.jpg")}}" alt="" class="card-img">
-                    <div class="name">Horror</div>
-                    <div class="total">80</div>
-                </div>
-
-                <div class="category-card">
-                    <img src={{asset("movie/assets/images/adventure.jpg")}} alt="" class="card-img">
-                    <div class="name">Adventure</div>
-                    <div class="total">100</div>
-                </div>
-
-                <div class="category-card">
-                    <img src="{{asset("movie/assets/images/animated.jpg")}}" alt="" class="card-img">
-                    <div class="name">Animated</div>
-                    <div class="total">50</div>
-                </div>
-
-                <div class="category-card">
-                    <img src={{asset("movie/assets/images/crime.jpg")}} alt="" class="card-img">
-                    <div class="name">Crime</div>
-                    <div class="total">20</div>
-                </div>
-
-                <div class="category-card">
-                    <img src={{asset("movie/assets/images/sci-fi.jpg")}} alt="" class="card-img">
-                    <div class="name">SCI-FI</div>
-                    <div class="total">80</div>
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-
-
-        <!--
-          - #LIVE SECTION
-        -->
-        <section class="live" id="live">
-
-            <h2 class="section-heading">Live Tv Shows</h2>
-
-            <div class="live-grid">
-
-                <div class="live-card">
-
-                    <div class="card-head">
-                        <img src={{asset("movie/assets/images/planet.jpg")}} alt="" class="card-img">
-                        <div class="live-badge">LIVE</div>
-                        <div class="total-viewers">305K viewers</div>
-                        <div class="play">
-                            <ion-icon name="play-circle-outline"></ion-icon>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <img src={{asset("movie/assets/images/bbcamerica.jpg")}} alt="" class="avatar">
-                        <h3 class="card-title">Planet Earth II <br> Season 1 - Islands</h3>
-                    </div>
-
-                </div>
-
-                <div class="live-card">
-
-                    <div class="card-head">
-                        <img src={{asset("movie/assets/images/got.jpg")}} alt="" class="card-img">
-                        <div class="live-badge">LIVE</div>
-                        <div class="total-viewers">1.7M viewers</div>
-                        <div class="play">
-                            <ion-icon name="play-circle-outline"></ion-icon>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <img src={{asset("movie/assets/images/HBO-Logo-square.jpg")}} alt="" class="avatar">
-                        <h3 class="card-title">Game of Thrones <br> Season 5 - Mother's Mercy</h3>
-                    </div>
-
-                </div>
-
-                <div class="live-card">
-
-                    <div class="card-head">
-                        <img src={{asset("movie/assets/images/vikins.jpg")}} alt="" class="card-img">
-                        <div class="live-badge">LIVE</div>
-                        <div class="total-viewers">468K viewers</div>
-                        <div class="play">
-                            <ion-icon name="play-circle-outline"></ion-icon>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <img src={{asset("movie/assets/images/HBO-Logo-square.jpg")}} alt="" class="avatar">
-                        <h3 class="card-title">Vikings <br> Season 4 - What Might Have Been</h3>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
+        </div>
+    </section>
 
 
 
 
 
     <!--
-      - FOOTER SECTION
+      - #TV SERIES
     -->
-    <footer>
 
-        <div class="footer-content">
+    <section class="tv-series">
+        <div class="container">
 
-            <div class="footer-brand">
-                <img src={{asset("movie/assets/images/logo.png")}} alt="" class="footer-logo">
-                <p class="slogan">Movies & TV Shows, Online cinema,
-                    Movie database HTML Template.</p>
+            <p class="section-subtitle">يعرض حالياً</p>
 
+            <h2 class="h2 section-title">أحدث المسلسلات</h2>
 
-                <div class="social-link">
+            <ul class="movies-list">
 
-                    <a href="#">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-tiktok"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-youtube"></ion-icon>
-                    </a>
+                @foreach($tvShows as $tvShow)
 
-                </div>
-            </div>
+                <li>
+                    <div class="movie-card">
 
+                        <a href="{{route('tvShow.details',$tvShow->id)}}">
+                            <figure class="card-banner">
+                                <img src="{{asset('images/tvShows')}}/{{$tvShow->imgPath}}" alt="{{$tvShow->title}}">
+                            </figure>
+                        </a>
 
-            <div class="footer-links">
-                <ul>
+                        <div class="title-wrapper">
+                            <a href="{{route('tvShow.details',$tvShow->id)}}">
+                                <h3 class="card-title">{{$tvShow->title}}</h3>
+                            </a>
 
-                    <h4 class="link-heading">CineFlix</h4>
+                        </div>
 
-                    <li class="link-item"><a href="#">About us</a></li>
-                    <li class="link-item"><a href="#">My profile</a></li>
-                    <li class="link-item"><a href="#">Pricing plans</a></li>
-                    <li class="link-item"><a href="#">Contacts</a></li>
+                        <div class="card-meta">
+                            <div class="badge badge-outline">720 الجودة</div>
 
-                </ul>
+                            <div class="duration">
+                                <data>{{'الموسم  '.$tvShow->season}}</data>
+                            </div>
 
-                <ul>
+                            <div class="rating">
+                                <data>الحلقات {{count($tvShow->episodes)}}</data>
+                                <ion-icon name="tv-outline"></ion-icon>
 
-                    <h4 class="link-heading">Browse</h4>
+                            </div>
+                        </div>
 
-                    <li class="link-item"><a href="#">Live Tv</a></li>
-                    <li class="link-item"><a href="#">Live News</a></li>
-                    <li class="link-item"><a href="#">Live Sports</a></li>
-                    <li class="link-item"><a href="#">Streaming Library</a></li>
-
-                </ul>
-
-                <ul>
-
-                    <li class="link-item"><a href="#">TV Shows</a></li>
-                    <li class="link-item"><a href="#">Movies</a></li>
-                    <li class="link-item"><a href="#">Kids</a></li>
-                    <li class="link-item"><a href="#">Collections</a></li>
-
-                </ul>
-
-                <ul>
-
-                    <h4 class="link-heading">Help</h4>
-
-                    <li class="link-item"><a href="#">Account & Billing</a></li>
-                    <li class="link-item"><a href="#">Plans & Pricing</a></li>
-                    <li class="link-item"><a href="#">Supported devices</a></li>
-                    <li class="link-item"><a href="#">Accessibility</a></li>
-
-                </ul>
-            </div>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
 
         </div>
-
-        <div class="footer-copyright">
-
-            <div class="copyright">
-                <p>&copy; copyright 2021 CineFlix</p>
-            </div>
-
-            <div class="wrapper">
-                <a href="#">Privacy policy</a>
-                <a href="#">Terms and conditions</a>
-            </div>
-
-        </div>
-
-    </footer>
-
-</div>
-
-
-
-
-
-<!--
-  - custom js link
--->
-<script src={{asset("movie/assets/js/main.js")}}></script>
-
-<!--
-  - ionicon link
--->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-</body>
-
-</html>
+    </section>
+@endsection

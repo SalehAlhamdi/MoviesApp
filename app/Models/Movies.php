@@ -26,6 +26,7 @@ class Movies extends Model
         return $this->belongsToMany(Types::class);
     }
 
+
 }
 
 

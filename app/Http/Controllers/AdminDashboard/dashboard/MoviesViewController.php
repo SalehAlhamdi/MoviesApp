@@ -25,6 +25,7 @@ class MoviesViewController extends Controller
 
     public function create_movie()
     {
+
         $genres = Genres::all();
         $types = Types::all();
         return response(view('admin.movies.create', compact('types', 'genres')));

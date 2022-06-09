@@ -28,4 +28,6 @@ class TvShows extends Model
         return in_array($id,$this->$object->pluck('id')->toArray());
 
     }
+
+
 }
