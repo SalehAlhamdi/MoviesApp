@@ -90,7 +90,7 @@
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-info-circle"></i>
                                                 </span>
-                                            <span class="text" role="button">عرض الفيلم</span>
+                                            <span class="text" role="button">عرض المسلسل</span>
                                         </a>
 
                                         <hr>
