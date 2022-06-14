@@ -941,7 +941,7 @@ body.active { overflow: hidden; }
 \*-----------------------------------*/
 
 .movie-detail {
-  background: url("public/movie/assets/images/movie-detail-bg.png") no-repeat;
+  background: url("../images/movie-detail-bg.png") no-repeat;
   background-size: cover;
   background-position: center;
   padding-top: 160px;
