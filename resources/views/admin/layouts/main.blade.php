@@ -9,6 +9,7 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title>
+    <link href="{{asset("admin/vendor/fontawesome-free/css/all.min.css")}}" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset("admin/vendor/jquery/jquery.min.js")}}"></script>
