@@ -18,9 +18,8 @@ class CreateEpisodesTable extends Migration
             $table->integer('ep_num');
             $table->integer('season');
             $table->string('vidPath');
-            $table->unsignedInteger('tv_shows_id');
+            $table->bigInteger('tv_shows_id');
             $table->timestamps();
-            $table->foreign('tv_shows_id')->references('id')->on('tv_shows')->onDelete('cascade');
 
         });
     }
