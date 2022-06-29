@@ -20,6 +20,8 @@ class CreateTvShowsTable extends Migration
             $table->text('description');
             $table->string('imgPath');
             $table->string('vidPath');
+            $table->integer("season");
+
         });
     }
 
