@@ -29,11 +29,12 @@ class InitAdminSeeder extends Seeder
 
 
 
-        $permission=Permission::all();
+        $permission=Permission::first();
         $role=Role::findById(1);
         $role->givePermissionTo($permission);
-        auth()->user()->givePermissionTo('manage accounts');
-        auth()->user()->assignRole('admin');
+        $user=User::all()->first();
+        $user->givePermissionTo('manage accounts');
+        $user->assignRole('admin');
 
         //Data insert into table
         $genres=['علمي','أكشن','رومانسي','كوميدي','دراما','خيال','رعب','غموض','مغامرات'];
